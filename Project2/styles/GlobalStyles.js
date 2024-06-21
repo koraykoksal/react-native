@@ -8,21 +8,19 @@ export const loginPage = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 10
-    },
-    contant1: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
         gap: 10,
+    },
+    inputContainer: {
+        width:'80%',
     },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 18
+        fontSize: 18,
+        alignSelf:'flex-start'
     },
     textInputStyle: {
-        width: '80%',
+        width: '100%',
         borderWidth: 0.5,
         borderRadius: 10,
         height: 50,
@@ -67,19 +65,23 @@ export const registerPage = StyleSheet.create({
         // justifyContent: 'center',
         // gap: 10
     },
-    contant1: {
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 10,
+    // contant1: {
+    //     flexDirection: 'column',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     gap: 10,
+    // },
+    inputContainer: {
+        width:'80%',
     },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 18
+        fontSize: 18,
+        alignSelf:'flex-start'
     },
     textInputStyle: {
-        width: '80%',
+        width: '100%',
         borderWidth: 0.5,
         borderRadius: 10,
         height: 50,

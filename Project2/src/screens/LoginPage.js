@@ -4,7 +4,7 @@ import { loginPage } from '../../styles/GlobalStyles';
 import loginIcon from "../../assets/images/login.png"
 import { useState } from 'react';
 
-export default function LoginPage({navigation}) {
+export default function LoginPage({ navigation }) {
 
     const [info, setInfo] = useState({
         username: "",
@@ -30,34 +30,37 @@ export default function LoginPage({navigation}) {
             <Image source={loginIcon} resizeMode='contain' style={loginPage.imgStyle} />
 
 
-            <Text style={loginPage.textStyle}>Username</Text>
+            <View style={loginPage.inputContainer}>
+                <Text style={loginPage.textStyle}>Username</Text>
+                <TextInput
+                    inputMode='text'
+                    style={loginPage.textInputStyle}
+                    id='username'
+                    value={info.username}
+                    placeholder='Username'
+                    onChangeText={(text) => handleChange('username', text)}
+                />
+            </View>
 
-            <TextInput
-                inputMode='text'
-                style={loginPage.textInputStyle}
-                id='username'
-                value={info.username}
-                placeholder='Username'
-                onChangeText={(text) => handleChange('username', text)}
-            />
+            <View style={loginPage.inputContainer}>
+                <Text style={loginPage.textStyle}>Password</Text>
 
-            <Text style={loginPage.textStyle}>Password</Text>
-
-            <TextInput
-                secureTextEntry={true}
-                inputMode='text'
-                style={loginPage.textInputStyle}
-                id='password'
-                value={info.password}
-                placeholder='Password'
-                onChangeText={(text) => handleChange('password', text)}
-            />
+                <TextInput
+                    secureTextEntry={true}
+                    inputMode='text'
+                    style={loginPage.textInputStyle}
+                    id='password'
+                    value={info.password}
+                    placeholder='Enter Your Password'
+                    onChangeText={(text) => handleChange('password', text)}
+                />
+            </View>
 
             <Pressable style={loginPage.btnLogin}>
                 <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Login</Text>
             </Pressable>
 
-            <Text style={loginPage.textInfo} onPress={()=>navigation.navigate('Register')}>Don't you have an account ?</Text>
+            <Text style={loginPage.textInfo} onPress={() => navigation.navigate('Register')}>Don't you have an account ?</Text>
 
 
         </SafeAreaView>
