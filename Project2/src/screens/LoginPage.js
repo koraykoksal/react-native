@@ -1,8 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pressable } from 'react-native';
 import { loginPage } from '../../styles/GlobalStyles';
-import loginIcon from "../../assets/images/login.png"
+import loginIcon from "../../assets/images/signin.png"
 import { useState } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 
 export default function LoginPage({ navigation }) {
 
@@ -57,10 +58,16 @@ export default function LoginPage({ navigation }) {
             </View>
 
             <Pressable style={loginPage.btnLogin}>
-                <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Login</Text>
+                <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Sign In</Text>
             </Pressable>
 
-            <Text style={loginPage.textInfo} onPress={() => navigation.navigate('Register')}>Don't you have an account ?</Text>
+            <View style={loginPage.signInMetods}>
+                <AntDesign name="google" size={35} color="black" />
+                <AntDesign name="apple1" size={35} color="black" />
+            </View>
+
+
+            <Text style={loginPage.textInfo} onPress={() => navigation.navigate('Sign Up')}>Don't you have an account ?</Text>
 
 
         </SafeAreaView>

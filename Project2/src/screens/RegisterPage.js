@@ -1,11 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pressable } from 'react-native';
 import { registerPage } from '../../styles/GlobalStyles';
-import newAccountIcon from "../../assets/images/new-account.png"
+import newAccountIcon from "../../assets/images/signup.png"
 import React, { useState } from 'react';
 import { CheckBox } from '@rneui/themed';
 import PrivacyPolicy from '../components/Modal/PrivacyPolicy';
-
+import { AntDesign } from '@expo/vector-icons';
 
 const RegisterPage = ({ navigation }) => {
 
@@ -116,9 +116,14 @@ const RegisterPage = ({ navigation }) => {
                         <CheckBox
                             checked={info.gdpr}
                             onPress={() => toggleCheckbox('gdpr')}
-                            iconType="material-community"
-                            checkedIcon="checkbox-outline"
-                            uncheckedIcon={'checkbox-blank-outline'}
+                            // iconType="material-community"
+                            iconType="ionicon"
+                            checkedIcon="checkbox-outline" // işaretli olduğun görünecek icon şekli
+                            uncheckedIcon={'ellipse-outline'} // işaretsiz olduğun görünecek icon şekli
+                            containerStyle={registerPage.checkboxContainer}
+                            wrapperStyle={registerPage.checkboxWrapper}
+                            checkedColor='#000'
+                            uncheckedColor='#000'
                             title={
                                 <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3, alignItems: 'center' }}>
                                     <Text>I have read and accept the privacy policy.</Text>
@@ -138,9 +143,15 @@ const RegisterPage = ({ navigation }) => {
                         <CheckBox
                             checked={info.notification}
                             onPress={() => toggleCheckbox('notification')}
-                            iconType="material-community"
-                            checkedIcon="checkbox-outline"
-                            uncheckedIcon={'checkbox-blank-outline'}
+                            // iconType="material-community"
+                            iconType="ionicon"
+                            checkedIcon="checkbox-outline" // işaretli olduğun görünecek icon şekli
+                            uncheckedIcon={'ellipse-outline'} // işaretsiz olduğun görünecek icon şekli
+                            // uncheckedIcon={'checkbox-blank-outline'}
+                            containerStyle={registerPage.checkboxContainer}
+                            wrapperStyle={registerPage.checkboxWrapper}
+                            checkedColor='#000'
+                            uncheckedColor='#000'
                             title={<View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3, alignItems: 'center' }}>
                                 <Text>Digital Notification Services.</Text>
                             </View>}
@@ -151,10 +162,17 @@ const RegisterPage = ({ navigation }) => {
                 </View>
 
                 <Pressable style={registerPage.btnLogin}>
-                    <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Register</Text>
+                    <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Sign Up</Text>
                 </Pressable>
 
-                <Text style={registerPage.textInfo} onPress={() => navigation.navigate('Login')}>Do you have an account ?</Text>
+
+                <View style={registerPage.signUpMetods}>
+                    <AntDesign name="google" size={35} color="black" />
+                    <AntDesign name="apple1" size={35} color="black" />
+                </View>
+
+
+                <Text style={registerPage.textInfo} onPress={() => navigation.navigate('Sign In')}>Already have an account?</Text>
 
             </ScrollView>
 

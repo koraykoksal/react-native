@@ -10,7 +10,15 @@ export default function UserStack() {
     return (
         <Stack.Navigator
             initialRouteName='Home'
-            screenOptions={{ headerShown: false }}
+            screenOptions={{
+                headerShown: true,
+                // headerTitle:'',
+                headerBackTitleVisible: false,// Geri tuşunun yanında "Back" yazısının görünmemesi için
+                headerTintColor: '#000', // Geri tuşunun rengini beyaz yapmak için
+                headerStyle: {
+                    backgroundColor: '#bebe', // Başlık arka planı rengi (örneğin, mavi tonları)
+                },
+            }}
         >
 
             <Stack.Screen name='Home' component={HomePage} />

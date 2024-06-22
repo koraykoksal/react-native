@@ -11,25 +11,25 @@ export const loginPage = StyleSheet.create({
         gap: 10,
     },
     inputContainer: {
-        width:'80%',
+        width: '80%',
     },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
         fontSize: 18,
-        alignSelf:'flex-start'
+        alignSelf: 'flex-start'
     },
     textInputStyle: {
         width: '100%',
-        borderWidth: 0.5,
+        borderBottomWidth: 0.5,
         borderRadius: 10,
         height: 50,
-        textAlign: 'center',
+        textAlign: 'left',
         marginVertical: 5,
         fontSize: 18,
     },
     imgStyle: {
-        height: 65,
+        height: 45,
         marginTop: 25,
         marginBottom: 25
     },
@@ -52,6 +52,16 @@ export const loginPage = StyleSheet.create({
         fontWeight: 800,
         letterSpacing: 5,
     },
+    signInMetods: {
+        width: '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        // gap: 25, 
+        marginTop: 20,
+        marginBottom: 20,
+        padding: 10
+    },
 })
 
 
@@ -59,40 +69,31 @@ export const loginPage = StyleSheet.create({
 export const registerPage = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
-        // flexDirection: 'column',
-        // alignItems: 'center',
-        // justifyContent: 'center',
-        // gap: 10
+        backgroundColor: '#DBB5B5',
+        // backgroundColor: '#fff',
     },
-    // contant1: {
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    //     justifyContent: 'center',
-    //     gap: 10,
-    // },
     inputContainer: {
-        width:'80%',
+        width: '80%',
     },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
         fontSize: 18,
-        alignSelf:'flex-start'
+        alignSelf: 'flex-start'
     },
     textInputStyle: {
         width: '100%',
-        borderWidth: 0.5,
+        borderBottomWidth: 0.5,
         borderRadius: 10,
         height: 50,
-        textAlign: 'center',
+        textAlign: 'left',
         marginVertical: 5,
         fontSize: 18,
     },
     imgStyle: {
-        height: 65,
-        marginTop: 25,
-        marginBottom: 25
+        height: 45,
+        marginTop: 30,
+        marginBottom: 30
     },
     btnLogin: {
         width: '50%',
@@ -123,12 +124,34 @@ export const registerPage = StyleSheet.create({
         justifyContent: 'center',
         gap: 3
     },
-    logo:{
-        flexDirection: 'column', 
-        alignItems: 'center', 
-        justifyContent: 'center', 
-        gap: 10, 
-        marginTop:15,
-        marginBottom: 10 
-    }
+    logo: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 10,
+        marginTop: 15,
+        marginBottom: 10
+    },
+    signUpMetods: {
+        width: '80%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        // gap: 25, 
+        marginTop: 20,
+        marginBottom: 20,
+        padding: 10
+    },
+    checkboxContainer: {
+        backgroundColor: 'transparent',
+        borderWidth: 0,
+    },
+    checkboxWrapper: {
+        backgroundColor: 'transparent',
+    },
 })
+
+
+export const appColors = {
+    appHeader: '#fff'
+}
