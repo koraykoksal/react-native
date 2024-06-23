@@ -1,10 +1,19 @@
 import { StyleSheet } from "react-native"
 
+export const appColors = {
+    authStackHeader: '#fff',
+    pink:'#DBB5B5',
+    white:'#fff',
+    black:'#000',
+    other:'#E1AA1F',
+    signUpBackground:"#D18959",
+    signInBackground:"#E1AA1F"
+}
 
 export const loginPage = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: appColors.signInBackground,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -57,11 +66,14 @@ export const loginPage = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        // gap: 25, 
         marginTop: 20,
         marginBottom: 20,
         padding: 10
     },
+    signInMethodsImg: {
+        height: 45,
+        width: 45
+    }
 })
 
 
@@ -69,8 +81,7 @@ export const loginPage = StyleSheet.create({
 export const registerPage = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#DBB5B5',
-        // backgroundColor: '#fff',
+        backgroundColor: appColors.signUpBackground,
     },
     inputContainer: {
         width: '80%',
@@ -137,7 +148,6 @@ export const registerPage = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        // gap: 25, 
         marginTop: 20,
         marginBottom: 20,
         padding: 10
@@ -149,9 +159,10 @@ export const registerPage = StyleSheet.create({
     checkboxWrapper: {
         backgroundColor: 'transparent',
     },
+    signInMethodsImg: {
+        height: 45,
+        width: 45
+    }
 })
 
 
-export const appColors = {
-    appHeader: '#fff'
-}

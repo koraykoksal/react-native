@@ -3,12 +3,14 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pre
 import { loginPage } from '../../styles/GlobalStyles';
 import loginIcon from "../../assets/images/signin.png"
 import { useState } from 'react';
-import { AntDesign } from '@expo/vector-icons';
+import facebook from "../../assets/images/facebook.png"
+import google from "../../assets/images/google.png"
+import phone from "../../assets/images/phone2.png"
 
 export default function LoginPage({ navigation }) {
 
     const [info, setInfo] = useState({
-        username: "",
+        email: "",
         password: ""
     })
 
@@ -32,14 +34,14 @@ export default function LoginPage({ navigation }) {
 
 
             <View style={loginPage.inputContainer}>
-                <Text style={loginPage.textStyle}>Username</Text>
+                <Text style={loginPage.textStyle}>Email</Text>
                 <TextInput
                     inputMode='text'
                     style={loginPage.textInputStyle}
-                    id='username'
-                    value={info.username}
-                    placeholder='Username'
-                    onChangeText={(text) => handleChange('username', text)}
+                    id='email'
+                    value={info.email.toLowerCase()}
+                    placeholder='Email'
+                    onChangeText={(text) => handleChange('email', text)}
                 />
             </View>
 
@@ -62,8 +64,9 @@ export default function LoginPage({ navigation }) {
             </Pressable>
 
             <View style={loginPage.signInMetods}>
-                <AntDesign name="google" size={35} color="black" />
-                <AntDesign name="apple1" size={35} color="black" />
+            <Image source={google} resizeMode='contain' style={loginPage.signInMethodsImg} />
+            {/* <Image source={facebook} resizeMode='contain' style={loginPage.signInMethodsImg} /> */}
+            <Image source={phone} resizeMode='contain' style={loginPage.signInMethodsImg} />
             </View>
 
 

@@ -5,19 +5,25 @@ import newAccountIcon from "../../assets/images/signup.png"
 import React, { useState } from 'react';
 import { CheckBox } from '@rneui/themed';
 import PrivacyPolicy from '../components/Modal/PrivacyPolicy';
-import { AntDesign } from '@expo/vector-icons';
+import facebook from "../../assets/images/facebook.png"
+import google from "../../assets/images/google.png"
+import phone from "../../assets/images/phone2.png"
+import useAuthCall from '../hook/useAuthCall';
 
 const RegisterPage = ({ navigation }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+
+    const {singUp} = useAuthCall()
 
     const [info, setInfo] = useState({
         namesurname: "",
         username: "",
         email: "",
         password: "",
-        notification: false,
-        gdpr: false
+        notification: false, // dijital bilgilendirme servisi
+        gdpr: false, // yasal hükümler
+        isActive:false // mail aktivasyonu
     })
 
 
@@ -89,7 +95,7 @@ const RegisterPage = ({ navigation }) => {
                         inputMode='email'
                         style={registerPage.textInputStyle}
                         id='email'
-                        value={info.email}
+                        value={info.email.toLowerCase()}
                         placeholder='Email'
                         onChangeText={(text) => handleChange('email', text)}
                     />
@@ -161,14 +167,15 @@ const RegisterPage = ({ navigation }) => {
 
                 </View>
 
-                <Pressable style={registerPage.btnLogin}>
+                <Pressable style={registerPage.btnLogin} onPress={()=>singUp('users',info)}>
                     <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Sign Up</Text>
                 </Pressable>
 
 
                 <View style={registerPage.signUpMetods}>
-                    <AntDesign name="google" size={35} color="black" />
-                    <AntDesign name="apple1" size={35} color="black" />
+                    <Image source={google} resizeMode='contain' style={registerPage.signInMethodsImg} />
+                    {/* <Image source={facebook} resizeMode='contain' style={registerPage.signInMethodsImg} /> */}
+                    <Image source={phone} resizeMode='contain' style={registerPage.signInMethodsImg} />
                 </View>
 
 

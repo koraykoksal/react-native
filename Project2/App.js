@@ -1,6 +1,9 @@
 import RootNavigation from "./src/navigation/RootNavigation";
 import { Provider } from "react-redux";
 import { store } from "./src/app/store";
+import Toast from 'react-native-toast-message';
+
+
 
 export default function App() {
 
@@ -8,6 +11,7 @@ export default function App() {
 
     <Provider store={store}>
       <RootNavigation />
+      <Toast />
     </Provider>
 
 
