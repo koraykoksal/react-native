@@ -4,8 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     loading: false,
     error: false,
-    userData:[],
-    token:""
+    userData: [],
+    token: ""
 }
 
 
@@ -24,10 +24,15 @@ export const authSlice = createSlice({
             state.loading = false
             state.error = true
         },
-        fetchUserSignUpData:(state,{payload})=>{
-            state.loading=false
-            state.userData=payload
-            state.token=payload?.user?.stsTokenManager?.accessToken
+        fetchUserSignUpData: (state, { payload }) => {
+            state.loading = false
+            state.userData = payload?.createdUser || []
+            state.token = payload?.user?.stsTokenManager?.accessToken || ""
+        },
+        fetchUserSignInData: (state, { payload }) => {
+            state.loading = false
+            state.userData = payload || []
+            state.token = payload?.stsTokenManager?.accessToken || ""
         }
 
     }
@@ -38,7 +43,8 @@ export const
 
         fetchStart,
         fetchFail,
-        fetchUserSignUpData
+        fetchUserSignUpData,
+        fetchUserSignInData
 
     } = authSlice.actions
 

@@ -2,22 +2,22 @@ import { StyleSheet } from "react-native"
 
 export const appColors = {
     authStackHeader: '#fff',
-    pink:'#DBB5B5',
-    white:'#fff',
-    black:'#000',
-    other:'#E1AA1F',
-    signUpBackground:"#D18959",
-    signInBackground:"#E1AA1F"
+    pink: '#DBB5B5',
+    white: '#fff',
+    black: '#000',
+    gray:'#A9A9A9',
+    other: '#4137B1',
+    signUpBackground: "#E1AA3F",
+    signInBackground: "#E1AA3F",
+    homeBackground:"#4137B1",
+    headerTitle_W: "#fff",
+    passwordResetBackground: "#1D232B"
 }
 
 export const loginPage = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: appColors.signInBackground,
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: 10,
     },
     inputContainer: {
         width: '80%',
@@ -25,7 +25,7 @@ export const loginPage = StyleSheet.create({
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 18,
+        fontSize: 16,
         alignSelf: 'flex-start'
     },
     textInputStyle: {
@@ -60,6 +60,16 @@ export const loginPage = StyleSheet.create({
         fontSize: 35,
         fontWeight: 800,
         letterSpacing: 5,
+        marginTop: 50
+    },
+    scrollView: {
+        marginHorizontal: 20,
+    },
+    contentContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 5
     },
     signInMetods: {
         width: '80%',
@@ -89,7 +99,7 @@ export const registerPage = StyleSheet.create({
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 18,
+        fontSize: 16,
         alignSelf: 'flex-start'
     },
     textInputStyle: {
@@ -163,6 +173,73 @@ export const registerPage = StyleSheet.create({
         height: 45,
         width: 45
     }
+})
+
+
+export const passwordResetPage = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: appColors.passwordResetBackground,
+    },
+    inputContainer: {
+        width: '80%',
+        marginTop: 50
+    },
+    inputContainerContent: {
+        flexDirection: 'column',
+        width: '100%',
+        gap: 5
+    },
+    textStyle: {
+        // marginTop: 20,
+        fontWeight: 700,
+        fontSize: 16,
+        alignSelf: 'flex-start',
+        color: appColors.white,
+    },
+    btnTextStyle: {
+        fontWeight: "bold",
+        fontSize: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: appColors.black
+    },
+    textInputStyle: {
+        width: '100%',
+        borderWidth: 0.5,
+        borderRadius: 10,
+        backgroundColor: '#fff',
+        height: 50,
+        textAlign: 'center',
+        fontSize: 18,
+    },
+
+    btnSubmit: {
+        width: '100%',
+        backgroundColor: appColors.white,
+        height: 50,
+        marginTop: 50,
+        marginBottom: 30,
+        borderRadius: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    textInfo: {
+        marginTop: 20,
+        marginBottom: 30,
+        color:appColors.white
+    },
+
+    scrollView: {
+        marginHorizontal: 20,
+    },
+    contentContainer: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 3
+    },
+
 })
 
 

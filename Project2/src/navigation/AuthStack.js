@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginPage, RegisterPage } from '../screens'
+import { LoginPage, RegisterPage, PasswordReset } from '../screens'
 import { NavigationContainer, useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { appColors } from '../../styles/GlobalStyles';
@@ -29,10 +29,12 @@ export default function AuthStack() {
                     headerShown: false, // başlık çubuğu
                     // headerTitle: "", // header başlığı
                     headerBackTitleVisible: false,
-                    headerTintColor: appColors.black,
+                    headerTintColor: appColors.black, // geri tuşu ve title rengi beraber değiyor
                     headerStyle: {
                         backgroundColor: appColors.signInBackground
-                    }
+                    },
+                    headerTitleAlign: 'center', // Başlık metnini ortalamak için
+
                 }}
             />
 
@@ -43,10 +45,28 @@ export default function AuthStack() {
                     headerShown: true, // başlık çubuğu
                     // headerTitle: "", // header başlığı
                     headerBackTitleVisible: false,
-                    headerTintColor: appColors.black,
+                    headerTintColor: appColors.black, // geri tuşu ve title rengi beraber değiyor
                     headerStyle: {
                         backgroundColor: appColors.signUpBackground
-                    }
+                    },
+                    headerTitleAlign: 'center', // Başlık metnini ortalamak için
+
+                }}
+            />
+
+
+            <Stack.Screen
+                name='Password Reset' // sayfa ismi
+                component={PasswordReset} // sayfanın kendisi
+                options={{
+                    headerShown: true, // başlık çubuğu
+                    // headerTitle: "", // header başlığı
+                    headerBackTitleVisible: false,
+                    headerTintColor: appColors.white, // geri tuşu ve title rengi beraber değiyor
+                    headerStyle: {
+                        backgroundColor: "#1D232B",
+                    },
+                    headerTitleAlign: 'center', // Başlık metnini ortalamak için
                 }}
             />
 
