@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pressable } from 'react-native';
 import { registerPage } from '../../styles/GlobalStyles';
 import newAccountIcon from "../../assets/images/signup.png"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CheckBox } from '@rneui/themed';
 import PrivacyPolicy from '../components/Modal/PrivacyPolicy';
 import facebook from "../../assets/images/facebook.png"
@@ -12,9 +12,10 @@ import useAuthCall from '../hook/useAuthCall';
 import { useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native-paper';
 
+
 const RegisterPage = ({ navigation }) => {
 
-    const { loading } = useSelector((state) => state.auth)
+    const { loading, userData } = useSelector((state) => state.auth)
     const { singUp } = useAuthCall()
 
     const [modalVisible, setModalVisible] = useState(false);
@@ -26,7 +27,8 @@ const RegisterPage = ({ navigation }) => {
         password: "",
         notification: false, // dijital bilgilendirme servisi
         gdpr: false, // yasal hükümler
-        isActive: false // mail aktivasyonu
+        isActive: false, // mail aktivasyonu
+        defaultBalance: 3 // varsayılan bakiye
     })
 
     const [errors, setErrors] = useState({
@@ -98,6 +100,9 @@ const RegisterPage = ({ navigation }) => {
             singUp('users', info);
         }
     }
+
+ 
+
 
     return (
 
@@ -192,8 +197,8 @@ const RegisterPage = ({ navigation }) => {
                             checkedColor='#000'
                             uncheckedColor='#000'
                             title={
-                                <View style={{ flexDirection: 'column', justifyContent: 'flex-start'}}>
-                                    
+                                <View style={{ flexDirection: 'column', justifyContent: 'flex-start' }}>
+
                                     <View style={{ flexDirection: 'row', justifyContent: 'center', gap: 3, alignItems: 'center', padding: 5 }}>
                                         <Text>I have read and accept the privacy policy.</Text>
                                         <Text

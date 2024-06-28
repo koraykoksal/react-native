@@ -5,6 +5,7 @@ const initialState = {
     loading: false,
     error: false,
     userData: [],
+    userInfo:[],
     token: ""
 }
 
@@ -26,13 +27,16 @@ export const authSlice = createSlice({
         },
         fetchUserSignUpData: (state, { payload }) => {
             state.loading = false
-            state.userData = payload?.createdUser || []
-            state.token = payload?.user?.stsTokenManager?.accessToken || ""
+            state.userData = payload || []
+            state.token = payload?.stsTokenManager?.accessToken || ""
         },
         fetchUserSignInData: (state, { payload }) => {
             state.loading = false
             state.userData = payload || []
             state.token = payload?.stsTokenManager?.accessToken || ""
+        },
+        fetchUserInfo:(state,{payload})=>{
+            state.userInfo=payload
         }
 
     }
@@ -44,7 +48,8 @@ export const
         fetchStart,
         fetchFail,
         fetchUserSignUpData,
-        fetchUserSignInData
+        fetchUserSignInData,
+        fetchUserInfo
 
     } = authSlice.actions
 

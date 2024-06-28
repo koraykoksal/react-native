@@ -1,10 +1,10 @@
 import { useNavigation } from "@react-navigation/native"
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { getDatabase, onValue, ref, remove, set, update } from "firebase/database"
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPhoneNumber, PhoneAuthProvider, GoogleAuthProvider, RecaptchaVerifier ,sendPasswordResetEmail} from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPhoneNumber, PhoneAuthProvider, GoogleAuthProvider, RecaptchaVerifier, sendPasswordResetEmail } from 'firebase/auth';
 import { format } from "date-fns"
 import { useDispatch } from "react-redux";
-import { fetchFail, fetchStart, fetchUserSignInData, fetchUserSignUpData } from "../features/authSlice.js";
+import { fetchFail, fetchStart, fetchUserInfo, fetchUserSignInData, fetchUserSignUpData } from "../features/authSlice.js";
 import useToastNotify, { toastSuccessNotify } from "../helper/ToastNotify.js";
 import { authErrorMessage, loginErrorMessage } from "../helper/control.js";
 import * as Google from 'expo-auth-session/providers/google';
@@ -67,87 +67,105 @@ const useAuthCall = () => {
     //! register işlemi
     const singUp = async (address, info) => {
 
-        dispatch(fetchStart())
+        // Redux State işlemini başlat
+        dispatch(fetchStart());
 
-        createUserWithEmailAndPassword(auth, info.email, info.password)
-            .then((userCredential) => {
+        try {
+            // Kullanıcı oluşturma işlemi
+            const userCredential = await createUserWithEmailAndPassword(auth, info.email, info.password);
+            const user = userCredential.user;
 
-                const user = userCredential.user;
+            // Veritabanına kayıt edilecek kullanıcı verilerini belirleme
+            const combinedData = {
+                namesurname: info.namesurname,
+                username: info.username,
+                email: info.email,
+                notification: info.notification,
+                gdpr: info.gdpr,
+                isActive: info.isActive,
+                defaultBalance: info.defaultBalance
+            };
 
-                // Realtime database
-                return set(ref(db, `${address}/` + user.uid), info)
-                    .then(() => {
+            // Redux store'a kullanıcı verilerini gönderme
+            dispatch(fetchUserSignUpData(user));
 
-                        // Firestore database (Eğer kullanıyorsanız)
-                        // return setDoc(doc(firestore, 'users', user.uid), {
-                        //   email: user.email,
-                        //   namesurname: info.namesurname,
-                        //   username: info.username,
-                        //   notification: info.notification,
-                        //   gdpr: info.gdpr,
-                        //   createdAt: format(currentDate, "yyyy-MM-dd HH:mm"),
-                        // });
+            toastSuccessNotify('Sign Up Success');
 
-                        // Realtime Database işlemi başarılı olduysa combinedData oluşturulur
-                        const combinedData = { user, createdUser: info }; // createdUser yerine info kullanılır
-                        dispatch(fetchUserSignUpData(combinedData));
+            // Realtime Database'e kayıt etme
+            await set(ref(db, `${address}/` + user.uid), combinedData);
 
-                    })
-            })
-            .then(() => {
-                toastSuccessNotify('Sign Up Success');
-            })
-            .catch((error) => {
-                //? burada gelen hata mesajını authErrorMessage fonksiyonuna gönder ve return al
-                toastErrorNotify(authErrorMessage(error));
-                dispatch(fetchFail())
-            });
-    }
 
+        } catch (error) {
+            // Hata mesajını handle etme
+            toastErrorNotify(authErrorMessage(error));
+            dispatch(fetchFail());
+        }
+    };
 
 
     //! normal login işlemi
-    const signIn = (info) => {
+    const signIn = async (info) => {
 
-        dispatch(fetchStart())
+        // State işlemini başlat
+        dispatch(fetchStart());
 
-        signInWithEmailAndPassword(auth, info.email, info.password)
-            .then((userCredential) => {
+        try {
+            // Kullanıcı giriş işlemi
+            const userCredential = await signInWithEmailAndPassword(auth, info.email, info.password);
+            const user = userCredential.user;
 
-                const user = userCredential.user;
-                dispatch(fetchUserSignInData(user))
-                toastSuccessNotify('Sign In Success')
+            // Redux store'a kullanıcı verilerini gönderme
+            dispatch(fetchUserSignInData(user));
+            toastSuccessNotify('Sign In Success');
+
+        } catch (error) {
+            console.log("error code:", error.message);
+
+            // Hata mesajını handle etme
+            toastErrorNotify(authErrorMessage(error));
+            dispatch(fetchFail());
+        }
+    };
+
+
+    //! Kullanıcı verisini Realtime database den çekme
+    const getUser = async (params,id) => {
+        try {
+
+            const countRef = ref(db,`${params}/`+id)
+
+            onValue(countRef, (snapshot) => {
+                const res = snapshot.val()
+
+                if (res) {
+                    console.log("data 1", res)
+                    dispatch(fetchUserInfo(res || []))
+                }
             })
-            .catch((error) => {
-                console.log("error code : ", error.message)
-                //? burada gelen hata mesajını authErrorMessage fonksiyonuna gönder ve return al
-                toastErrorNotify(authErrorMessage(error))
-                dispatch(fetchFail())
-            });
 
+        } catch (error) {
+            console.log("hata oluştu")
+        }
     }
 
 
     //! parola resetleme işlemi
-    const passwordReset=(info)=>{
-
-        sendPasswordResetEmail(auth, info.email)
-            .then(() => {
-                // setSuccess('Password reset email sent successfully.');
-                toastInfoNotify('Password reset email sent successfully.')
-            })
-            .catch((error) => {
-                toastErrorNotify(error.message)
-                toast.show(error.message, { type: 'danger' });
-            });
-    }
+    const passwordReset = async (info) => {
+        try {
+            await sendPasswordResetEmail(auth, info.email);
+            toastInfoNotify('Password reset email sent successfully.');
+        } catch (error) {
+            toastErrorNotify(error.message);
+            console.error("Error sending password reset email:", error);
+        }
+    };
 
     return {
 
         singUp,
         signIn,
-        passwordReset
-        // googleSign
+        passwordReset,
+        getUser,
     }
 
 

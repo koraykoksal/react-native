@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function OtherPage1() {
+export default function Premium() {
   return (
     <View>
-      <Text>OtherPage1</Text>
+      <Text>Premium</Text>
     </View>
   )
 }
