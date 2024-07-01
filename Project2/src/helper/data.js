@@ -1,4 +1,5 @@
 
+
 //? home page de bottom alanındaki menü için kullanılan json datası
 export const sportNames=[
     {
@@ -15,6 +16,22 @@ export const sportNames=[
     }
 ]
 
+
+export const barMenu=[
+
+    {
+        title:"Profile",
+        icon:require('../../assets/images/user.png')
+    },
+    {
+        title:"Settings",
+        icon:require('../../assets/images/settings.png')
+    },
+    {
+        title:"Sign Out",
+        icon:require('../../assets/images/power.png')
+    }
+]
 
 export const premiumData=[
 

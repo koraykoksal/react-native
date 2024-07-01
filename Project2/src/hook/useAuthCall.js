@@ -4,7 +4,7 @@ import { getDatabase, onValue, ref, remove, set, update } from "firebase/databas
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPhoneNumber, PhoneAuthProvider, GoogleAuthProvider, RecaptchaVerifier, sendPasswordResetEmail } from 'firebase/auth';
 import { format } from "date-fns"
 import { useDispatch } from "react-redux";
-import { fetchFail, fetchStart, fetchUserInfo, fetchUserSignInData, fetchUserSignUpData } from "../features/authSlice.js";
+import { fetchFail, fetchLogOut, fetchStart, fetchUserInfo, fetchUserSignInData, fetchUserSignUpData } from "../features/authSlice.js";
 import useToastNotify, { toastSuccessNotify } from "../helper/ToastNotify.js";
 import { authErrorMessage, loginErrorMessage } from "../helper/control.js";
 import * as Google from 'expo-auth-session/providers/google';
@@ -138,7 +138,6 @@ const useAuthCall = () => {
                 const res = snapshot.val()
 
                 if (res) {
-                    console.log("data 1", res)
                     dispatch(fetchUserInfo(res || []))
                 }
             })
@@ -160,12 +159,23 @@ const useAuthCall = () => {
         }
     };
 
+
+    //! uygulamadan çık
+    const signOut=()=>{
+        try {
+            dispatch(fetchLogOut())
+        } catch (error) {
+            toastErrorNotify(error.message);
+        }
+    }
+
     return {
 
         singUp,
         signIn,
         passwordReset,
         getUser,
+        signOut
     }
 
 

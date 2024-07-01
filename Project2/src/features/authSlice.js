@@ -37,6 +37,12 @@ export const authSlice = createSlice({
         },
         fetchUserInfo:(state,{payload})=>{
             state.userInfo=payload
+        },
+        fetchLogOut:(state)=>{
+            state.loading=false,
+            state.token=""
+            state.userData=[]
+            state.userInfo=[]
         }
 
     }
@@ -49,7 +55,8 @@ export const
         fetchFail,
         fetchUserSignUpData,
         fetchUserSignInData,
-        fetchUserInfo
+        fetchUserInfo,
+        fetchLogOut
 
     } = authSlice.actions
 

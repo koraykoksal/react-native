@@ -325,7 +325,7 @@ export const homePageStyle = StyleSheet.create({
         bottom: 0,
         left: 0,
         right: 0,
-        height: 85, // Bottom bar yüksekliği
+        height: 100, // Bottom bar yüksekliği
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

@@ -31,11 +31,11 @@ export default function Premium() {
         />
 
 
-        <Pressable 
-        onPress={()=>navigate.navigate('Home')}
-        style={styles.closeIcon}
+        <Pressable
+          onPress={() => navigate.navigate('Home')}
+          style={styles.closeIcon}
         >
-        <AntDesign name="closecircle" size={24} color="#375A64"  />
+          <AntDesign name="closecircle" size={24} color="#375A64" />
         </Pressable>
 
       </View>
