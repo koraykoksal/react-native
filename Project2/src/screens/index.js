@@ -4,7 +4,7 @@ import ProfilePage from "./ProfilePage";
 import RegisterPage from "./RegisterPage";
 import PasswordReset from "./PasswordReset";
 import Premium from "./Premium";
-
+import Started from "./Started";
 
 export {
     HomePage,
@@ -12,5 +12,6 @@ export {
     ProfilePage,
     RegisterPage,
     PasswordReset,
-    Premium
+    Premium,
+    Started
 }

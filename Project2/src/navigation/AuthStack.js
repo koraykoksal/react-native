@@ -1,5 +1,5 @@
 import React from 'react'
-import { LoginPage, RegisterPage, PasswordReset } from '../screens'
+import { LoginPage, RegisterPage, PasswordReset,Started } from '../screens'
 import { NavigationContainer, useNavigation, useNavigationState, useRoute } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { appColors } from '../../styles/GlobalStyles';
@@ -23,11 +23,28 @@ export default function AuthStack() {
         >
 
             <Stack.Screen
+            name='Get Started'
+            component={Started}
+            options={{
+                headerShown: false, // başlık çubuğu
+                headerTitle: "", // header başlığı
+                headerBackTitleVisible: false,
+                // headerTintColor: appColors.black,
+                headerStyle: {
+                    backgroundColor: '#364F81'
+                },
+                headerTitleAlign: 'center',
+            
+            }}
+            />
+
+
+            <Stack.Screen
                 name='Sign In' // sayfa adı
                 component={LoginPage} // sayfanın kendisi
                 options={{
                     headerShown: false, // başlık çubuğu
-                    // headerTitle: "", // header başlığı
+                    headerTitle: "", // header başlığı
                     headerBackTitleVisible: false,
                     headerTintColor: appColors.black, // geri tuşu ve title rengi beraber değiyor
                     headerStyle: {
@@ -43,7 +60,7 @@ export default function AuthStack() {
                 component={RegisterPage} // sayfanın kendisi
                 options={{
                     headerShown: true, // başlık çubuğu
-                    // headerTitle: "", // header başlığı
+                    headerTitle: "", // header başlığı
                     headerBackTitleVisible: false,
                     headerTintColor: appColors.black, // geri tuşu ve title rengi beraber değiyor
                     headerStyle: {
@@ -64,7 +81,7 @@ export default function AuthStack() {
                     headerBackTitleVisible: false,
                     headerTintColor: appColors.white, // geri tuşu ve title rengi beraber değiyor
                     headerStyle: {
-                        backgroundColor: "#1D232B",
+                        backgroundColor: appColors.passwordResetBackground,
                     },
                     headerTitleAlign: 'center', // Başlık metnini ortalamak için
                 }}

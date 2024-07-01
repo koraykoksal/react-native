@@ -5,14 +5,18 @@ export const appColors = {
     pink: '#DBB5B5',
     white: '#fff',
     black: '#000',
-    gray:'#A9A9A9',
-    yellow:"#FFB743",
+    gray: '#A9A9A9',
+    yellow: "#FBC700",
+    green: "#46775B",
     other: '#4137B1',
-    signUpBackground: "#E1AA3F",
-    signInBackground: "#E1AA3F",
-    homeBackground:"#4137B1",
+    signUpBackground: "#fff",
+    // signUpBackground: "#E1AA3F",
+    signInBackground: "#FBC700",
+    // signInBackground: "#E1AA3F",
+    homeBackground: "#46775B",
     headerTitle_W: "#fff",
-    passwordResetBackground: "#1D232B"
+    passwordResetBackground: "#375A64"
+    // passwordResetBackground: "#1D232B"
 }
 
 
@@ -24,11 +28,35 @@ export const loginPage = StyleSheet.create({
     inputContainer: {
         width: '80%',
     },
+    inputContent: {
+        flexDirection: 'column',
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginBottom: 50,
+        marginTop: 50
+    },
+    header: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 10,
+        marginTop: 50,
+        marginBottom: 50
+    },
+    bottom: {
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 15,
+        marginTop: 20
+    },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 16,
-        alignSelf: 'flex-start'
+        fontSize: 17,
+        alignSelf: 'flex-start',
+        color: '#375A64'
     },
     textInputStyle: {
         width: '100%',
@@ -46,23 +74,29 @@ export const loginPage = StyleSheet.create({
     },
     btnLogin: {
         width: '50%',
-        backgroundColor: '#1D232B',
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderColor: '#375A64',
+        // backgroundColor: '#1D232B',
         height: 50,
         marginTop: 30,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
-    textInfo: {
-        textDecorationLine: 'underline',
-        padding: 10
+    btnText: {
+        color: '#375A64',
+        fontWeight: 'bold',
+        fontSize: 18,
+        letterSpacing: 3
     },
+
     betIQ: {
-        color: '#D80032',
+        color: '#375A64',
+        // color: '#D80032',
         fontSize: 35,
         fontWeight: 800,
         letterSpacing: 5,
-        marginTop: 50
     },
     scrollView: {
         marginHorizontal: 20,
@@ -71,7 +105,7 @@ export const loginPage = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 5
+        gap: 10
     },
     signInMetods: {
         width: '80%',
@@ -98,11 +132,24 @@ export const registerPage = StyleSheet.create({
     inputContainer: {
         width: '80%',
     },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start'
+    },
+    headerText: {
+        marginBottom: 30,
+        marginTop: 30,
+        fontSize: 23,
+        fontWeight: 'bold',
+        color: '#375A64'
+    },
     textStyle: {
         marginTop: 20,
         fontWeight: 700,
-        fontSize: 16,
-        alignSelf: 'flex-start'
+        fontSize: 17,
+        alignSelf: 'flex-start',
+        color: '#375A64'
     },
     textInputStyle: {
         width: '100%',
@@ -120,20 +167,27 @@ export const registerPage = StyleSheet.create({
     },
     btnLogin: {
         width: '50%',
-        backgroundColor: '#1D232B',
+        backgroundColor: appColors.yellow,
         height: 50,
         marginTop: 30,
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    btnText: {
+        color: '#375A64',
+        fontWeight: 'bold',
+        fontSize: 18,
+        letterSpacing: 3
+    },
     textInfo: {
-        textDecorationLine: 'underline',
+        // textDecorationLine: 'underline',
         marginTop: 10,
         marginBottom: 30,
     },
     betIQ: {
-        color: '#D80032',
+        color: '#375A64',
+        // color: '#D80032',
         fontSize: 35,
         fontWeight: 800,
         letterSpacing: 5,
@@ -229,7 +283,7 @@ export const passwordResetPage = StyleSheet.create({
     textInfo: {
         marginTop: 20,
         marginBottom: 30,
-        color:appColors.white
+        color: appColors.white
     },
 
     scrollView: {
@@ -248,98 +302,99 @@ export const passwordResetPage = StyleSheet.create({
 
 export const homePageStyle = StyleSheet.create({
     container: {
-      flex: 1,
-      backgroundColor: appColors.gray,
+        flex: 1,
+        backgroundColor: '#fff',
+        // backgroundColor: appColors.gray,
     },
     header: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      right: 0,
-      height: 70, // Header yüksekliği
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: 5,
-      backgroundColor: '#272727',
-      padding: 10,
-      zIndex: 1,
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 70, // Header yüksekliği
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: 5,
+        backgroundColor: '#272727',
+        padding: 10,
+        zIndex: 1,
     },
     bottom: {
-      position: 'absolute',
-      bottom: 0,
-      left: 0,
-      right: 0,
-      height: 85, // Bottom bar yüksekliği
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 5,
-      borderTopLeftRadius: 50,
-      borderTopRightRadius: 50,
-      backgroundColor: '#4137B1',
-      padding: 10,
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: 85, // Bottom bar yüksekliği
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 5,
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        backgroundColor: '#46775B',
+        padding: 10,
     },
     content: {
-      flex: 1,
-      width: '100%',
-      marginTop: 80,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: 'red',
+        flex: 1,
+        width: '100%',
+        marginTop: 80,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'red',
     },
     pointStyle: {
-      color: '#fff',
-      fontSize: 18,
-      fontWeight: 'bold',
-      alignItems: 'center',
+        color: '#fff',
+        fontSize: 18,
+        fontWeight: 'bold',
+        alignItems: 'center',
     },
     balanceTextStyle: {
-      color: 'gray',
-      fontSize: 14,
-      fontWeight: 'bold',
-      alignItems: 'center',
+        color: 'gray',
+        fontSize: 14,
+        fontWeight: 'bold',
+        alignItems: 'center',
     },
     textStyle: {
-      color: "#fff",
-      fontSize: 16,
-      fontWeight: 'bold',
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: 'bold',
     },
     scrollView: {
-      marginHorizontal: 20,
+        marginHorizontal: 20,
     },
     contentContainer: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 5,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 5,
     },
     bottomBtnStyle: {
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 2
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 2
     },
     activeBtnStyle: {
-      borderBottomWidth: 5,
-      borderBottomColor: '#A9A9A9',
-      marginTop: 5
+        borderBottomWidth: 5,
+        borderBottomColor: '#A9A9A9',
+        marginTop: 5
     },
     bottomContentStyle: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-around',
-      padding: 1,
-      width: '100%'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: 1,
+        width: '100%'
     },
     headerContentStyle: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      padding: 10,
-      gap: 5,
-      width: '100%'
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 10,
+        gap: 5,
+        width: '100%'
     }
-  });
+});
 

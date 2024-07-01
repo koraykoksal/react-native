@@ -11,7 +11,7 @@ import phone from "../../assets/images/phone2.png"
 import useAuthCall from '../hook/useAuthCall';
 import { useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native-paper';
-
+import profile from "../../assets/animations/profile.gif"
 
 const RegisterPage = ({ navigation }) => {
 
@@ -101,24 +101,25 @@ const RegisterPage = ({ navigation }) => {
         }
     }
 
- 
+
 
 
     return (
 
         <SafeAreaView style={registerPage.container}>
 
+
+
             <ScrollView
                 style={registerPage.scrollView}
                 contentContainerStyle={registerPage.contentContainer}
             >
 
-                <View style={registerPage.logo}>
-                    <Text style={registerPage.betIQ}>BetIQ</Text>
-                    <Text>AI supported betting analysis.</Text>
+                <View
+                    style={registerPage.header}
+                >
+                    <Text style={registerPage.headerText}>Create your account.</Text>
                 </View>
-
-                <Image source={newAccountIcon} resizeMode='contain' style={registerPage.imgStyle} />
 
 
                 <View style={registerPage.inputContainer}>
@@ -188,7 +189,6 @@ const RegisterPage = ({ navigation }) => {
                         <CheckBox
                             checked={info.gdpr}
                             onPress={() => toggleCheckbox('gdpr')}
-                            // iconType="material-community"
                             iconType="ionicon"
                             checkedIcon="checkbox-outline" // işaretli olduğun görünecek icon şekli
                             uncheckedIcon={'ellipse-outline'} // işaretsiz olduğun görünecek icon şekli
@@ -221,11 +221,9 @@ const RegisterPage = ({ navigation }) => {
                         <CheckBox
                             checked={info.notification}
                             onPress={() => toggleCheckbox('notification')}
-                            // iconType="material-community"
                             iconType="ionicon"
                             checkedIcon="checkbox-outline" // işaretli olduğun görünecek icon şekli
                             uncheckedIcon={'ellipse-outline'} // işaretsiz olduğun görünecek icon şekli
-                            // uncheckedIcon={'checkbox-blank-outline'}
                             containerStyle={registerPage.checkboxContainer}
                             wrapperStyle={registerPage.checkboxWrapper}
                             checkedColor='#000'
@@ -249,25 +247,14 @@ const RegisterPage = ({ navigation }) => {
                         :
                         (
                             <Pressable style={registerPage.btnLogin} onPress={handleSubmit}>
-                                <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Sign Up</Text>
+                                <Text style={registerPage.btnText}>Sign Up</Text>
                             </Pressable>
                         )
                 }
 
 
 
-                {/* <View style={registerPage.signUpMetods}>
-                    <Pressable>
-                        <Image source={google} resizeMode='contain' style={registerPage.signInMethodsImg} />
-                    </Pressable>
-
-                    <Pressable>
-                        <Image source={phone} resizeMode='contain' style={registerPage.signInMethodsImg} />
-                    </Pressable>
-                </View> */}
-
-
-                <Text style={registerPage.textInfo} onPress={() => navigation.navigate('Sign In')}>Already have an account?</Text>
+                <Text style={registerPage.textInfo} onPress={() => navigation.navigate('Sign In')}>Already have an account ?</Text>
 
             </ScrollView>
 

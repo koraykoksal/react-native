@@ -14,3 +14,29 @@ export const sportNames=[
         icon:require('../../assets/images/dribbble.png')
     }
 ]
+
+
+export const premiumData=[
+
+    {
+        type:"Weekly",
+        price:"149.99",
+        currency:"$",
+        check:"w",
+        discount: null,
+    },
+    {
+        type:"Monthly",
+        price:"499.99",
+        currency:"$",
+        check:"m",
+        discount: "42% OFF",
+    },
+    {
+        type:"Annual",
+        price:"2499.99",
+        currency:"$",
+        check:"a",
+        discount: "88% OFF",
+    }
+]

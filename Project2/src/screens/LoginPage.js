@@ -70,46 +70,43 @@ export default function LoginPage({ navigation }) {
             >
 
 
-                <View style={{
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    gap: 10,
-                    marginBottom: 20
-                }}>
+                <View style={loginPage.header}>
                     <Text style={loginPage.betIQ}>BetIQ</Text>
                     <Text>AI supported betting analysis.</Text>
                 </View>
 
-                <Image source={loginIcon} resizeMode='contain' style={loginPage.imgStyle} />
 
 
-                <View style={loginPage.inputContainer}>
-                    <Text style={loginPage.textStyle}>Email</Text>
-                    <TextInput
-                        inputMode='email'
-                        style={loginPage.textInputStyle}
-                        id='email'
-                        value={info.email ? info.email.toLowerCase() : ""}
-                        placeholder='Your Email'
-                        onChangeText={(text) => handleChange('email', text)}
-                    />
-                    {errors.email ? <Text style={errorStyle('email')}>{errors.email}</Text> : null}
-                </View>
+                <View style={loginPage.inputContent}>
+                    
+                    <View style={loginPage.inputContainer}>
+                        <Text style={loginPage.textStyle}>Email</Text>
+                        <TextInput
+                            inputMode='email'
+                            style={loginPage.textInputStyle}
+                            id='email'
+                            value={info.email ? info.email.toLowerCase() : ""}
+                            placeholder='Your Email'
+                            onChangeText={(text) => handleChange('email', text)}
+                        />
+                        {errors.email ? <Text style={errorStyle('email')}>{errors.email}</Text> : null}
+                    </View>
 
-                <View style={loginPage.inputContainer}>
-                    <Text style={loginPage.textStyle}>Password</Text>
+                    <View style={loginPage.inputContainer}>
+                        <Text style={loginPage.textStyle}>Password</Text>
 
-                    <TextInput
-                        secureTextEntry={true}
-                        inputMode='text'
-                        style={loginPage.textInputStyle}
-                        id='password'
-                        value={info.password}
-                        placeholder='Enter Your Password'
-                        onChangeText={(text) => handleChange('password', text)}
-                    />
-                    {errors.password ? <Text style={errorStyle('password')}>{errors.password}</Text> : null}
+                        <TextInput
+                            secureTextEntry={true}
+                            inputMode='text'
+                            style={loginPage.textInputStyle}
+                            id='password'
+                            value={info.password}
+                            placeholder='Enter Your Password'
+                            onChangeText={(text) => handleChange('password', text)}
+                        />
+                        {errors.password ? <Text style={errorStyle('password')}>{errors.password}</Text> : null}
+                    </View>
+                    
                 </View>
 
                 {
@@ -119,35 +116,23 @@ export default function LoginPage({ navigation }) {
                         :
                         (
                             <Pressable style={loginPage.btnLogin} onPress={handleSubmit}>
-                                <Text style={{ color: '#fff', fontWeight: 700, fontSize: 17 }}>Sign In</Text>
+                                <Text style={loginPage.btnText}>Sign In</Text>
                             </Pressable>
                         )
                 }
 
-                <Text
-                    style={{
-                        padding: 20,
-                        textDecorationLine: 'underline'
-                    }}
-                    onPress={() => navigation.navigate('Password Reset')}
-                >
-                    Forgot your password ?
-                </Text>
 
 
-                {/* <View style={loginPage.signInMetods}>
-                <Pressable>
-                    <Image source={google} resizeMode='contain' style={loginPage.signInMethodsImg} />
-                </Pressable>
-                <Pressable>
-                    <Image source={phone} resizeMode='contain' style={loginPage.signInMethodsImg} />
-                </Pressable>
-            </View> */}
+                <View style={loginPage.bottom}>
+                    <Text
+                        onPress={() => navigation.navigate('Password Reset')}
+                    >
+                        Forgot your password ?
+                    </Text>
 
 
-
-
-                <Text style={loginPage.textInfo} onPress={() => navigation.navigate('Sign Up')}>Don't you have an account ?</Text>
+                    <Text onPress={() => navigation.navigate('Sign Up')}>Don't you have an account ?</Text>
+                </View>
 
             </ScrollView>
 
