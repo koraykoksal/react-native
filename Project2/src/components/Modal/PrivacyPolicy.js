@@ -7,34 +7,37 @@ const PrivacyPolicy = ({ modalVisible, setModalVisible }) => {
     // const pdfDocument = require('../../../assets/docs/TheBetIQ_privacy_en.pdf');
 
     return (
-        <Modal
-            animationType="slide"
-            transparent={false}
-            visible={modalVisible}
-            onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-                setModalVisible(!modalVisible);
-            }}>
+        <SafeAreaView>
 
-            <View style={styles.container}>
+            <Modal
+                animationType="slide"
+                transparent={false}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                    setModalVisible(!modalVisible);
+                }}>
 
-                {/* <Pdf
+                <View style={styles.container}>
+
+                    {/* <Pdf
                     trustAllCerts={false}
                     source={pdfDocument}
                     style={styles.pdf}
                     onLoadComplete={(numberOfPages, filePath) => {
                         console.log(`Number of pages: ${numberOfPages}`);
-                    }}
-                /> */}
+                        }}
+                        /> */}
 
-                <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}>
-                    <Text style={styles.textStyle}>Close</Text>
-                </Pressable>
-            </View>
+                    <Pressable
+                        style={[styles.button, styles.buttonClose]}
+                        onPress={() => setModalVisible(!modalVisible)}>
+                        <Text style={styles.textStyle}>Close</Text>
+                    </Pressable>
+                </View>
 
-        </Modal>
+            </Modal>
+        </SafeAreaView>
     );
 }
 

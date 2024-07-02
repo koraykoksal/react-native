@@ -1,7 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pressable } from 'react-native';
 import { registerPage } from '../../styles/GlobalStyles';
-import newAccountIcon from "../../assets/images/signup.png"
 import React, { useState, useEffect } from 'react';
 import { CheckBox } from '@rneui/themed';
 import PrivacyPolicy from '../components/Modal/PrivacyPolicy';
@@ -11,14 +9,17 @@ import phone from "../../assets/images/phone2.png"
 import useAuthCall from '../hook/useAuthCall';
 import { useSelector } from 'react-redux';
 import { ActivityIndicator } from 'react-native-paper';
-import profile from "../../assets/animations/profile.gif"
+import { format } from "date-fns"
+import { PASSWORD_REGEX } from "@env"
 
 const RegisterPage = ({ navigation }) => {
 
     const { loading, userData } = useSelector((state) => state.auth)
     const { singUp } = useAuthCall()
-
+    const currentDate = new Date()
     const [modalVisible, setModalVisible] = useState(false);
+    const passwordRegex = new RegExp(PASSWORD_REGEX);
+    const [passwordRegexError, setPasswordRegexError] = useState("")
 
     const [info, setInfo] = useState({
         namesurname: "",
@@ -28,7 +29,10 @@ const RegisterPage = ({ navigation }) => {
         notification: false, // dijital bilgilendirme servisi
         gdpr: false, // yasal hükümler
         isActive: false, // mail aktivasyonu
-        defaultBalance: 3 // varsayılan bakiye
+        defaultBalance: 3, // varsayılan bakiye
+        premiumStatus: "passive",
+        premiumBalance: 0,
+        createdDate: format(currentDate, "yyyy-MM-dd HH:mm")
     })
 
     const [errors, setErrors] = useState({
@@ -60,8 +64,11 @@ const RegisterPage = ({ navigation }) => {
     const handleChange = (id, value) => {
         setInfo(prevInfo => ({ ...prevInfo, [id]: value }));
         setErrors(prevErrors => ({ ...prevErrors, [id]: "" })); // Hata mesajını temizle
+        setPasswordRegexError(""); // Şifre regex hatasını temizle
     }
 
+
+    //! onchange işleminde girilen bilgilerin valide kontrolünü yap
     const validate = () => {
         let valid = true;
         let newErrors = {};
@@ -84,6 +91,9 @@ const RegisterPage = ({ navigation }) => {
         if (!info.password) {
             newErrors.password = "Password is required";
             valid = false;
+        } else if (!passwordRegex.test(info.password)) {
+            newErrors.password = "Password must contain at least 6 characters and both uppercase and lowercase letters.";
+            valid = false;
         }
 
         if (!info.gdpr) {
@@ -95,20 +105,16 @@ const RegisterPage = ({ navigation }) => {
         return valid;
     };
 
+
     const handleSubmit = () => {
         if (validate()) {
             singUp('users', info);
         }
     }
 
-
-
-
     return (
 
         <SafeAreaView style={registerPage.container}>
-
-
 
             <ScrollView
                 style={registerPage.scrollView}
@@ -178,7 +184,8 @@ const RegisterPage = ({ navigation }) => {
                         placeholder='Password'
                         onChangeText={(text) => handleChange('password', text)}
                     />
-                    {errors.password ? <Text style={errorStyle('password')}>{errors.password}</Text> : null}
+                    {errors.password && <Text style={errorStyle('password')}>{errors.password}</Text>}
+                    {passwordRegex && <Text style={errorStyle('password')}>{passwordRegexError}</Text>}
 
                 </View>
 

@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image, ScrollView, Animated, Dimensions } from 'react-native';
+import { View, Text, Pressable, Image, ScrollView, Animated, Dimensions, StyleSheet, SafeAreaView } from 'react-native';
 import React, { useState, useEffect, useRef } from 'react';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
@@ -39,17 +39,18 @@ export default function HomePage() {
 
   // Menü açma/kapama işlemi
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    const toValue = isMenuOpen ? -250 : 0;
+    setIsMenuOpen(!isMenuOpen); // Durumu önce güncelleriz
     Animated.timing(menuAnimation, {
-      toValue: isMenuOpen ? -250 : 0,
-      duration: 3000,
+      toValue,
+      duration: 300, // Animasyon süresi
       useNativeDriver: false,
     }).start();
   };
 
 
   return (
-    <View style={homePageStyle.container}>
+    <SafeAreaView style={homePageStyle.container}>
 
       <View style={homePageStyle.header}>
         <View style={homePageStyle.headerContentStyle}>
@@ -73,28 +74,29 @@ export default function HomePage() {
               borderRadius: 5
             }}>
 
-              <FontAwesome6 name="crown" size={24} color="#FBC700" />
+              {
+                userInfo.premiumStatus === "active" ?
+                  (
+                    ""
+                  )
+                  :
+                  (
+                    <FontAwesome6 name="crown" size={24} color={appColors.yellow} />
+                  )
+              }
+
 
               <Text style={{ color: appColors.yellow, fontWeight: 'bold' }}>Premium</Text>
 
             </View>
           </Pressable>
 
-          {/* menu aç */}
+          {/* MENU AC */}
           <Pressable
             onPress={toggleMenu}
           >
-            {
-              isMenuOpen ?
-                (
-                  <FontAwesome6 name="bars-staggered" size={24} color="white" />
-                )
-                :
-                (
-                  <FontAwesome5 name="bars" size={24} color="white" />
-
-                )
-            }
+            {/* <FontAwesome5 name="bars" size={24} color="white" /> */}
+            <FontAwesome6 name="bars-staggered" size={24} color="white" />
           </Pressable>
 
 
@@ -103,16 +105,9 @@ export default function HomePage() {
 
       {isMenuOpen ?
         (
-          <ScrollView
-            style={{ backgroundColor: '#272727' }}
-            contentContainerStyle={{
-              flexDirection: 'column',
-              marginTop: 70,
-            }}
-          >
-            <LeftMenu isMenuOpen={isMenuOpen} />
-            
-          </ScrollView>
+          <Animated.View style={[styles.animatedMenu, { transform: [{ translateX: menuAnimation }] }]}>
+            <LeftMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+          </Animated.View>
         )
         :
         (
@@ -144,7 +139,7 @@ export default function HomePage() {
                       onPress={() => handleOnPress(item.title)}
                     >
                       <Image source={item.icon} resizeMode='contain' style={{ width: 40, height: 40 }} />
-                      <Text style={{ color: '#fff' }}>{item.title}</Text>
+                      <Text style={{ color: appColors.black }}>{item.title}</Text>
                     </Pressable>
                   ))
                 }
@@ -152,17 +147,25 @@ export default function HomePage() {
               </View>
             </View>
 
-
-
-
           </>
         )
 
       }
 
 
-    </View>
+    </SafeAreaView>
   );
 }
 
+const styles = StyleSheet.create({
+  animatedMenu: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#272727',
+    zIndex: 1000,
+  },
+});
 

@@ -1,11 +1,11 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View ,SafeAreaView} from 'react-native'
 import React from 'react'
 
 export default function Soccer() {
   return (
-    <View>
+    <SafeAreaView>
       <Text>Soccer</Text>
-    </View>
+    </SafeAreaView>
   )
 }
 

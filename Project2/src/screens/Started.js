@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, ScrollView, Image, Pressable } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Image, Pressable,SafeAreaView } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
 import animo from "../../assets/animations/animation.json"
@@ -8,7 +8,7 @@ export default function Starter() {
     const navigate = useNavigation();
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.contentContainer}>
                 
                 <View style={styles.header}>
@@ -37,7 +37,7 @@ export default function Starter() {
                 </Pressable>
 
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }
 
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     header: {
-        marginTop: 150,
+        marginTop: 100,
         flexDirection:'column',
         justifyContent:'center',
         alignItems: 'center',

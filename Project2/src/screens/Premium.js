@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, Pressable } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, Pressable,SafeAreaView } from 'react-native';
 import { premiumData } from "../helper/data";
-import soccerField from "../../assets/images/soccerField.png";
+import soccerField from "../../assets/images/soccerField2.png";
 import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -21,13 +21,14 @@ export default function Premium() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
 
       <View style={styles.content1}>
+        
         <Image
           source={soccerField}
           resizeMode='cover'
-          style={{ width: '100%', height: '100%' }}
+          style={{ height:'100%',width:'100%'}}
         />
 
 
@@ -35,7 +36,7 @@ export default function Premium() {
           onPress={() => navigate.navigate('Home')}
           style={styles.closeIcon}
         >
-          <AntDesign name="closecircle" size={24} color="#375A64" />
+          <AntDesign name="closecircle" size={24} color="gray" />
         </Pressable>
 
       </View>
@@ -73,7 +74,7 @@ export default function Premium() {
         </Pressable>
       </View>
 
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
     left: 20,
   },
   content2: {
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(0,0,0, 0.7)',
     borderTopLeftRadius: 50,
     borderTopRightRadius: 50,
     position: 'absolute',

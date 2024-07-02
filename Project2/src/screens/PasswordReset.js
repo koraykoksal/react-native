@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, StatusBar, ScrollView, Pressable, TextInput } from 'react-native'
+import { StyleSheet, Text, View, StatusBar, ScrollView, Pressable, TextInput ,SafeAreaView} from 'react-native'
 import React, { useState } from 'react'
 import { passwordResetPage } from '../../styles/GlobalStyles'
 import useAuthCall from '../hook/useAuthCall'
@@ -49,15 +49,12 @@ export default function PasswordReset() {
   }
 
   return (
-    <View style={passwordResetPage.container}>
+    <SafeAreaView style={passwordResetPage.container}>
 
       <ScrollView
         style={passwordResetPage.scrollView}
         contentContainerStyle={passwordResetPage.contentContainer}
       >
-
-
-
 
         <View style={passwordResetPage.inputContainer}>
 
@@ -98,7 +95,7 @@ export default function PasswordReset() {
 
       </ScrollView>
 
-    </View>
+    </SafeAreaView>
   )
 }
 

@@ -17,10 +17,10 @@ export default function UserStack() {
                 headerBackTitleVisible: false,
                 headerTintColor: appColors.black,
                 headerStyle: {
-                    backgroundColor: appColors.homeBackground,
+                    backgroundColor: appColors.white,
                 },
                 headerTitleStyle: {
-                    color: appColors.white
+                    color: appColors.black
                 }
             }}
 
@@ -28,9 +28,15 @@ export default function UserStack() {
 
             <Stack.Screen name='Home'
                 options={{
+                    headerShown: true,
+                    // headerTitle:'',
+                    headerBackTitleVisible: false,
                     headerTitleStyle: {
-                        color: appColors.headerTitle_W
-                    }
+                        color: appColors.black
+                    },
+                    headerStyle: {
+                        backgroundColor: appColors.white,
+                    },
                 }}
                 component={HomePage}
             />
@@ -39,8 +45,8 @@ export default function UserStack() {
 
             <Stack.Screen name='Premium'
                 options={{
-                    headerShown:false,
-                    headerTitle:"",
+                    headerShown: false,
+                    headerTitle: "",
                     headerTitleStyle: {
                         color: appColors.headerTitle_W
                     },

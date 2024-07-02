@@ -332,7 +332,8 @@ export const homePageStyle = StyleSheet.create({
         gap: 5,
         borderTopLeftRadius: 50,
         borderTopRightRadius: 50,
-        backgroundColor: '#46775B',
+        backgroundColor: '#FBC700',
+        // backgroundColor: '#46775B',
         padding: 10,
     },
     content: {
