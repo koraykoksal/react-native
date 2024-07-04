@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native"
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
-import { getDatabase, onValue, ref, remove, set, update } from "firebase/database"
+import { getDatabase, onValue, ref, remove, set, update, child ,get} from "firebase/database"
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPhoneNumber, PhoneAuthProvider, GoogleAuthProvider, RecaptchaVerifier, sendPasswordResetEmail } from 'firebase/auth';
 import { format } from "date-fns"
 import { useDispatch } from "react-redux";
@@ -91,8 +91,11 @@ const useAuthCall = () => {
 
             toastSuccessNotify('Sign Up Success');
 
+            // kullanıcı parola bilgisini real time veri tabanına ekleme
+            delete info.password
+            
             // Realtime Database'e kayıt etme
-            await set(ref(db, `${address}/` + user.uid), combinedData);
+            await set(ref(db, `${address}/` + user.uid), info);
 
 
         } catch (error) {
@@ -129,10 +132,10 @@ const useAuthCall = () => {
 
 
     //! Kullanıcı verisini Realtime database den çekme
-    const getUser = async (params,id) => {
+    const getUser = async (params, id) => {
         try {
 
-            const countRef = ref(db,`${params}/`+id)
+            const countRef = ref(db, `${params}/` + id)
 
             onValue(countRef, (snapshot) => {
                 const res = snapshot.val()
@@ -161,7 +164,7 @@ const useAuthCall = () => {
 
 
     //! uygulamadan çık
-    const signOut=()=>{
+    const signOut = () => {
         try {
             dispatch(fetchLogOut())
         } catch (error) {
@@ -169,13 +172,36 @@ const useAuthCall = () => {
         }
     }
 
+
+
+    const userNameCheck = async (params,info) => {
+
+        const dbRef = ref(db);
+        const snapshot = await get(child(dbRef, params));
+        // console.log("snap : ",snapshot)
+        if (snapshot.exists()) {
+            const users = snapshot.val();
+            // console.log("users : ",users)
+            for (const userId in users) {
+                if (users[userId].username === info.username) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+
     return {
 
         singUp,
         signIn,
         passwordReset,
         getUser,
-        signOut
+        signOut,
+        userNameCheck
     }
 
 

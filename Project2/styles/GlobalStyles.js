@@ -95,7 +95,7 @@ export const loginPage = StyleSheet.create({
         color: '#375A64',
         // color: '#D80032',
         fontSize: 35,
-        fontWeight: 800,
+        fontWeight: 'bold',
         letterSpacing: 5,
     },
     scrollView: {

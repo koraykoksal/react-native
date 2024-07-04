@@ -15,6 +15,7 @@ import { sportNames } from '../helper/data';
 import { useSelector } from 'react-redux';
 import useAuthCall from '../hook/useAuthCall';
 import LeftMenu from '../components/LeftMenu';
+import Premium from '../components/Modal/Premium';
 
 
 export default function HomePage() {
@@ -25,6 +26,7 @@ export default function HomePage() {
   const [activeButton, setActiveButton] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-250)).current;
+  const [modalVisible, setModalVisible] = useState(false);
 
   //? bottom alanındaki pressable butonu onclick olduğu zaman çalışacak fonksiyon
   const handleOnPress = (buttonName) => {
@@ -58,7 +60,8 @@ export default function HomePage() {
           <Text style={homePageStyle.textStyle}>Balance : {userInfo?.defaultBalance}</Text>
 
           <Pressable onPress={() => {
-            navigate.navigate('Premium'),
+            setModalVisible(true),
+            // navigate.navigate('Premium'),
               //menu açıksa kapat
               isMenuOpen && setIsMenuOpen(false)
           }}>
@@ -152,6 +155,7 @@ export default function HomePage() {
 
       }
 
+        <Premium modalVisible={modalVisible} setModalVisible={setModalVisible}/>
 
     </SafeAreaView>
   );

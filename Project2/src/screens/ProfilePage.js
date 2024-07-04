@@ -1,18 +1,23 @@
-import { StyleSheet, Text, View, Image, ScrollView, SafeAreaView, Pressable } from 'react-native'
-import React from 'react'
+import { StyleSheet, View, Image, ScrollView, SafeAreaView, Pressable } from 'react-native'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { FontAwesome6 } from '@expo/vector-icons';
 import { appColors } from '../../styles/GlobalStyles';
 import { AntDesign } from '@expo/vector-icons';
-
+import { useNavigation } from '@react-navigation/native';
+import Premium from '../components/Modal/Premium';
+import { Chip, withTheme, lightColors, Text, Icon } from '@rneui/themed';
 
 export default function ProfilePage() {
 
+  const navigate = useNavigation()
   const { userInfo } = useSelector((state) => state.auth)
   const imgFile = false
+  const [modalVisible, setModalVisible] = useState(false);
 
   const gdprStatus = userInfo.gdpr ? "Enabled" : "Disabled";
   const notificationStatus = userInfo.notification ? "Enabled" : "Disabled";
+  const premiumSatus = userInfo.premiumSatus ? "Enabled" : "Disabled";
 
   return (
     <SafeAreaView style={styles.container}>
@@ -21,22 +26,43 @@ export default function ProfilePage() {
 
         <View style={styles.header}>
 
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 10, padding: 10, width: '80%' }}>
+          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5, padding: 10, width: '80%', flexWrap: 'wrap' }}>
             <FontAwesome6 name="crown" size={30} color={appColors.yellow} />
-            <Text style={{ fontSize: 18, color: '#fff', fontWeight: 'bold' }}>Premium Status : {userInfo.premiumSatus}</Text>
+            <Text style={{ fontSize: 18, color: '#fff', fontWeight: 'bold' }}>Premium Status : {premiumSatus}</Text>
+
+            {
+              premiumSatus === "Enabled" ?
+                (
+                  ""
+                )
+                :
+                (
+                  <Chip title="Upgrade"
+                    icon={{
+                      name: 'rocket',
+                      type: 'font-awesome',
+                      size: 20,
+                      color: 'white',
+                    }}
+                    containerStyle={{ marginVertical: 15 }}
+                    onPress={() => setModalVisible(true)}
+                  />
+                )
+            }
+
           </View>
 
-          <Image source={require('../../assets/images/account.png')} style={styles.imgStyle} />
+
+
+
+          <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 15 }}>
+            <Image source={require('../../assets/images/account.png')} style={styles.imgStyle} />
+            <Icon
+              disabled={userInfo.premiumSatus ? false : true}
+              name='edit' color={'gray'} />
+          </View>
 
           <View style={styles.content}>
-
-            <View style={{ width: '80%', flexDirection: 'row', alignItems: 'flex-start' }}>
-              <Pressable 
-              disabled={userInfo.premiumSatus ? false:true}
-              >
-                <AntDesign name="edit" size={30} color="gray" />
-              </Pressable>
-            </View>
 
             <View style={styles.contentStyle}>
               <Text style={{ fontSize: 18, color: appColors.yellow }}>Name Surname</Text>
@@ -62,6 +88,8 @@ export default function ProfilePage() {
 
         </View>
       </ScrollView>
+
+      <Premium modalVisible={modalVisible} setModalVisible={setModalVisible} />
     </SafeAreaView>
   )
 }

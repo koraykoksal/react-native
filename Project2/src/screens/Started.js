@@ -13,7 +13,7 @@ export default function Starter() {
                 
                 <View style={styles.header}>
                     <Text style={styles.headerText}>
-                        BetIQ
+                        betIQ
                     </Text>
                     <Text style={styles.subHeaderText}>AI supported betting analysis.</Text>
                 </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontWeight: 'bold',
         color: '#375A64',
-        fontSize: 30,
+        fontSize: 35,
         letterSpacing:5
     },
     subHeaderText: {

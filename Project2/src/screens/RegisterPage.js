@@ -15,10 +15,11 @@ import { PASSWORD_REGEX } from "@env"
 const RegisterPage = ({ navigation }) => {
 
     const { loading, userData } = useSelector((state) => state.auth)
-    const { singUp } = useAuthCall()
+    const { singUp, userNameCheck } = useAuthCall()
     const currentDate = new Date()
     const [modalVisible, setModalVisible] = useState(false);
-    const passwordRegex = new RegExp(PASSWORD_REGEX);
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/
+    // const passwordRegex = new RegExp(PASSWORD_REGEX);
     const [passwordRegexError, setPasswordRegexError] = useState("")
 
     const [info, setInfo] = useState({
@@ -91,7 +92,8 @@ const RegisterPage = ({ navigation }) => {
         if (!info.password) {
             newErrors.password = "Password is required";
             valid = false;
-        } else if (!passwordRegex.test(info.password)) {
+        }
+        else if (!passwordRegex.test(info.password)) {
             newErrors.password = "Password must contain at least 6 characters and both uppercase and lowercase letters.";
             valid = false;
         }
@@ -106,7 +108,14 @@ const RegisterPage = ({ navigation }) => {
     };
 
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        const usernameExists = await userNameCheck("users", info.username);
+
+        if (usernameExists) {
+            setErrors({ ...errors, ['username']: "Username already exists" });
+            return
+        }
+
         if (validate()) {
             singUp('users', info);
         }
@@ -128,6 +137,7 @@ const RegisterPage = ({ navigation }) => {
                 </View>
 
 
+                {/* NAME SURNAME */}
                 <View style={registerPage.inputContainer}>
                     <Text style={registerPage.textStyle}>Name Surname</Text>
                     <TextInput
@@ -141,6 +151,7 @@ const RegisterPage = ({ navigation }) => {
                     {errors.namesurname ? <Text style={errorStyle('namesurname')}>{errors.namesurname}</Text> : null}
                 </View>
 
+                {/* USERNAME */}
                 <View style={registerPage.inputContainer}>
                     <Text style={registerPage.textStyle}>Username</Text>
 
@@ -156,6 +167,8 @@ const RegisterPage = ({ navigation }) => {
                     {errors.username ? <Text style={errorStyle('username')}>{errors.username}</Text> : null}
                 </View>
 
+
+                {/* EMAIL */}
                 <View style={registerPage.inputContainer}>
                     <Text style={registerPage.textStyle}>Email</Text>
 
@@ -172,6 +185,7 @@ const RegisterPage = ({ navigation }) => {
 
                 </View>
 
+                {/* PASSWORD */}
                 <View style={registerPage.inputContainer}>
                     <Text style={registerPage.textStyle}>Password</Text>
 
@@ -188,6 +202,7 @@ const RegisterPage = ({ navigation }) => {
                     {passwordRegex && <Text style={errorStyle('password')}>{passwordRegexError}</Text>}
 
                 </View>
+
 
 
                 <View style={{ flexDirection: 'column', justifyContent: 'flex-start', padding: 10 }}>

@@ -71,7 +71,7 @@ export default function LoginPage({ navigation }) {
 
 
                 <View style={loginPage.header}>
-                    <Text style={loginPage.betIQ}>BetIQ</Text>
+                    <Text style={loginPage.betIQ}>betIQ</Text>
                     <Text>AI supported betting analysis.</Text>
                 </View>
 

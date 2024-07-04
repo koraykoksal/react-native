@@ -1,5 +1,5 @@
 import React from 'react'
-import { HomePage, ProfilePage, Premium } from '../screens' // bu sayfaları screens içinde index.js içinde arayacak (veya screens/index.js diyerek dosya yolu belirtilebilir.)
+import { HomePage, ProfilePage } from '../screens' // bu sayfaları screens içinde index.js içinde arayacak (veya screens/index.js diyerek dosya yolu belirtilebilir.)
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { appColors } from '../../styles/GlobalStyles';
 
@@ -43,17 +43,6 @@ export default function UserStack() {
 
             <Stack.Screen name='Profile' component={ProfilePage} />
 
-            <Stack.Screen name='Premium'
-                options={{
-                    headerShown: false,
-                    headerTitle: "",
-                    headerTitleStyle: {
-                        color: appColors.headerTitle_W
-                    },
-                    headerTintColor: appColors.white
-                }}
-                component={Premium}
-            />
 
         </Stack.Navigator>
     )
