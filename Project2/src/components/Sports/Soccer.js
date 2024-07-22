@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, TextInput, Image, Pressable, ActivityIndicator } from 'react-native'
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, TextInput, Image, Pressable, ActivityIndicator, TouchableOpacity } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import { appColors } from '../../../styles/GlobalStyles'
 import { Feather } from '@expo/vector-icons';
@@ -6,19 +6,23 @@ import { timeControl } from '../../helper/control';
 import { useSelector } from 'react-redux';
 import { Entypo } from '@expo/vector-icons';
 import useToastNotify from '../../helper/ToastNotify';
+import { AntDesign } from '@expo/vector-icons'; // İkon kullanımı için
+
 
 export default function Soccer({ fixturesData }) {
 
   const [selectedFavorites, setSelectedFavorites] = useState([])
   const { loading } = useSelector((state) => state.user)
+  const [filteredData, setFilteredData] = useState([]);
+  const [search, setSearch] = useState("")
 
-  const {toastInfoNotify}=useToastNotify()
+  const { toastInfoNotify } = useToastNotify()
 
   const toggleFavorite = (item) => {
     if (selectedFavorites.includes(item)) {
       setSelectedFavorites(selectedFavorites.filter(fav => fav !== item));
       toastInfoNotify('Remove From Favorites')
-    } 
+    }
     else {
       setSelectedFavorites([...selectedFavorites, item]);
       toastInfoNotify('Added To Favorites')
@@ -27,15 +31,47 @@ export default function Soccer({ fixturesData }) {
 
   const isFavorite = (item) => selectedFavorites.includes(item);
 
+  useEffect(() => {
+    const filterData = () => {
+      if (search === "") {
+        setFilteredData(fixturesData.response);
+      } else {
+        const lowercasedSearch = search.toLowerCase();
+        const filtered = fixturesData.response.filter(item => {
+          return (
+            item.teams.home.name.toLowerCase().includes(lowercasedSearch) ||
+            item.teams.away.name.toLowerCase().includes(lowercasedSearch) ||
+            item.league.name.toLowerCase().includes(lowercasedSearch) ||
+            item.league.country.toLowerCase().includes(lowercasedSearch)
+          );
+        });
+        setFilteredData(filtered);
+      }
+    };
+
+    filterData();
+  }, [search, fixturesData.response]);
 
   return (
     <SafeAreaView style={styles.container}>
 
+      <View style={styles.searchContainer}>
       <TextInput
         style={styles.input}
         placeholder='Search'
         inputMode='text'
+        id='search'
+        value={search}
+        onChangeText={(text) => setSearch(text)}
       />
+
+      {search.length > 0 && (
+        <TouchableOpacity onPress={() => setSearch("")} style={styles.clearButton}>
+          <AntDesign name="closecircle" size={24} color="gray" />
+        </TouchableOpacity>
+      )}
+      </View>
+
 
       <Text style={styles.text}>Fixtures</Text>
 
@@ -58,7 +94,7 @@ export default function Soccer({ fixturesData }) {
               contentContainerStyle={styles.scrolViewContent}>
 
               {
-                fixturesData?.response.map((item, index) => (
+                filteredData?.map((item, index) => (
                   <View
                     key={index}
                     style={{
@@ -173,5 +209,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     textAlign: 'center',
     fontSize: 16,
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent:'space-between',
+    gap:5
   },
 })
