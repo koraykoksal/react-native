@@ -28,14 +28,14 @@ export default function UserStack() {
 
             <Stack.Screen name='Home'
                 options={{
-                    headerShown: true,
-                    // headerTitle:'',
+                    headerShown: false,
+                    headerTitle:'',
                     headerBackTitleVisible: false,
                     headerTitleStyle: {
                         color: appColors.black
                     },
                     headerStyle: {
-                        backgroundColor: appColors.white,
+                        backgroundColor: appColors.green,
                     },
                 }}
                 component={HomePage}

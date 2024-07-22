@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'flex-start',
         gap: 5,
-        width: '100%'
+        width: '100%',
     },
     menu: {
         backgroundColor: '#bebe',

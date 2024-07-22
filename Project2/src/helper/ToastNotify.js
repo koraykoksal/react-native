@@ -10,8 +10,8 @@ const useToastNotify = () => {
     const toastSuccessNotify = (msg) => {
       toast.show(msg, {
         type: "success",
-        placement: "bottom",
-        duration: 1000,
+        placement: "top",
+        duration: 2000,
         offset: 30,
         animationType: "slide-in",
         style: { backgroundColor: 'green' },
@@ -24,7 +24,7 @@ const useToastNotify = () => {
     const toastErrorNotify = (msg) => {
       toast.show(msg, {
         type: "danger",
-        placement: "bottom",
+        placement: "top",
         duration: 3000,
         offset: 30,
         animationType: "slide-in",
@@ -38,13 +38,13 @@ const useToastNotify = () => {
     const toastInfoNotify = (msg) => {
       toast.show(msg, {
         type: "normal",
-        placement: "bottom",
-        duration: 1500,
+        placement: "top",
+        duration: 2000,
         offset: 30,
         animationType: "slide-in",
-        style: { backgroundColor: 'gray' },
-        icon:<AntDesign name="infocirlce" size={24} color="#fff" />,
-        textStyle:{fontSize:16}
+        style: { backgroundColor: '#96C9F4' },
+        // icon:<AntDesign name="infocirlce" size={24} color="#fff" />,
+        textStyle:{fontSize:16,color:'#000'}
       });
     };
   

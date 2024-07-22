@@ -34,3 +34,17 @@ export function authErrorMessage(error) {
 
     return errorMessage
 }
+
+
+export function timeControl(str,zone) {
+
+    const timezone = zone;
+
+    // Timestamp'i milisaniyeye çevir
+    const date = new Date(str * 1000);
+
+    // İstediğiniz formatta ve zaman diliminde tarihi dönüştür
+    const options = { timeZone: timezone, hour: '2-digit', minute: '2-digit', hour12: false };
+    return formattedDate = date.toLocaleTimeString('en-US', options);
+
+}

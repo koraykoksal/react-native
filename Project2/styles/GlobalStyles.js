@@ -1,4 +1,20 @@
 import { StyleSheet } from "react-native"
+import { getStatusBarHeight } from 'react-native-status-bar-height';
+
+
+/**
+  
+left menu icon color :
+
+blue : #3FA2F6
+red : #FF0000
+ 
+ */
+
+
+// status bar yüksekliği
+const statusBarHeight = getStatusBarHeight();
+
 
 export const appColors = {
     authStackHeader: '#fff',
@@ -305,13 +321,14 @@ export const homePageStyle = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         // backgroundColor: appColors.gray,
+        marginTop:60
     },
     header: {
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
-        height: 70, // Header yüksekliği
+        height: 50, // Header yüksekliği
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -320,30 +337,28 @@ export const homePageStyle = StyleSheet.create({
         padding: 10,
         zIndex: 1,
     },
-    bottom: {
+    top: {
         position: 'absolute',
-        bottom: 0,
+        // bottom: 0,
+        top: 50,
         left: 0,
         right: 0,
-        height: 100, // Bottom bar yüksekliği
+        height: 50, // Bottom bar yüksekliği
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: 5,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 50,
-        backgroundColor: '#FBC700',
-        // backgroundColor: '#46775B',
+        justifyContent: 'space-between',
+        // gap: 30,
+        backgroundColor: '#EEEDEB',
         padding: 10,
     },
     content: {
         flex: 1,
         width: '100%',
-        marginTop: 80,
+        marginTop: 55,
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'red',
+        // backgroundColor: 'red',
     },
     pointStyle: {
         color: '#fff',
@@ -375,26 +390,32 @@ export const homePageStyle = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 2
     },
-    activeBtnStyle: {
-        borderBottomWidth: 5,
-        borderBottomColor: '#A9A9A9',
-        marginTop: 5
+    activeTextStyle: {
+        fontWeight:'bold',
     },
-    bottomContentStyle: {
+    topContentStyle: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-start',
+        gap: 30,
         padding: 1,
-        width: '100%'
+        marginTop:13,
+        marginLeft:15,
+        width: '100%',
+    },
+    topContentStyle2: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: 3,
     },
     headerContentStyle: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 10,
-        gap: 5,
+        // padding: 10,
+        // gap: 5,
         width: '100%'
     }
 });

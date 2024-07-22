@@ -11,8 +11,8 @@ export const sportNames=[
         icon:require('../../assets/images/basketball.png')
     },
     {
-        title:"NBA",
-        icon:require('../../assets/images/dribbble.png')
+        title:"Tennis",
+        icon:require('../../assets/images/tennis.png')
     }
 ]
 
@@ -22,6 +22,10 @@ export const barMenu=[
     {
         title:"Profile",
         icon:require('../../assets/images/user.png')
+    },
+    {
+        title:"Draft",
+        icon:require('../../assets/images/draft.png')
     },
     {
         title:"Settings",

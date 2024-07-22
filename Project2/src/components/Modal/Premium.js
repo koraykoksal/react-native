@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, TextInput, Pressable, Alert, Modal, Dimensions, TouchableOpacity } from 'react-native';
 import { premiumData } from "../../helper/data";
 import soccerField from "../../../assets/images/soccerField2.png";
-import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
