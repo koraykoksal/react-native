@@ -4,15 +4,18 @@ import { appColors } from '../../../styles/GlobalStyles'
 import { Feather } from '@expo/vector-icons';
 import { timeControl } from '../../helper/control';
 import { useSelector } from 'react-redux';
-import { Entypo } from '@expo/vector-icons';
 import useToastNotify from '../../helper/ToastNotify';
 import { AntDesign } from '@expo/vector-icons'; // İkon kullanımı için
+import useSportCall from '../../hook/useSportCall';
+import aiImg from "../../../assets/images/cpu.png"
 
+export default function Soccer({ fixturesData, userData, userInfo }) {
 
-export default function Soccer({ fixturesData }) {
+  const { loading } = useSelector((state) => state.user)
+  const { postFavoriteData } = useSportCall()
 
   const [selectedFavorites, setSelectedFavorites] = useState([])
-  const { loading } = useSelector((state) => state.user)
+
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("")
 
@@ -52,24 +55,35 @@ export default function Soccer({ fixturesData }) {
     filterData();
   }, [search, fixturesData.response]);
 
+
+  //favoriler state her güncellendiğinde fonksiyon çalıştır
+  useEffect(() => {
+    const combinedData = { selectedFavorites, userData, userInfo }
+    postFavoriteData(combinedData)
+  }, [selectedFavorites])
+
+
+
+  console.log(fixturesData.response)
+
   return (
     <SafeAreaView style={styles.container}>
 
       <View style={styles.searchContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder='Search'
-        inputMode='text'
-        id='search'
-        value={search}
-        onChangeText={(text) => setSearch(text)}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder='Search'
+          inputMode='text'
+          id='search'
+          value={search}
+          onChangeText={(text) => setSearch(text)}
+        />
 
-      {search.length > 0 && (
-        <TouchableOpacity onPress={() => setSearch("")} style={styles.clearButton}>
-          <AntDesign name="closecircle" size={24} color="gray" />
-        </TouchableOpacity>
-      )}
+        {search.length > 0 && (
+          <TouchableOpacity onPress={() => setSearch("")} style={styles.clearButton}>
+            <AntDesign name="closecircle" size={24} color="gray" />
+          </TouchableOpacity>
+        )}
       </View>
 
 
@@ -94,7 +108,8 @@ export default function Soccer({ fixturesData }) {
               contentContainerStyle={styles.scrolViewContent}>
 
               {
-                filteredData?.map((item, index) => (
+                //! başlamamış olan macları listele
+                filteredData?.filter(item=>item?.fixture?.status.short === "NS").map((item, index) => (
                   <View
                     key={index}
                     style={{
@@ -120,10 +135,15 @@ export default function Soccer({ fixturesData }) {
                           height={25}
                           source={{ uri: item?.league?.logo }}
                         />
-                        <Text style={{ color: '#fff' }}>{item?.league?.name}</Text>
+                        <Text style={{ color: '#fff' }}>{item?.league?.country}-{item?.league?.name}</Text>
                       </View>
 
-                      <Text style={{ color: '#000' }}>{item?.league?.country}</Text>
+                      <AntDesign
+                        name={isFavorite(item) ? "star" : "staro"}
+                        size={22}
+                        color="black"
+                        onPress={() => toggleFavorite(item)}
+                      />
 
                     </View>
 
@@ -136,12 +156,17 @@ export default function Soccer({ fixturesData }) {
 
                         <Text>{timeControl(item?.fixture?.timestamp, item?.fixture?.timezone)}</Text>
 
-                        <Entypo
-                          name={isFavorite(item) ? "star" : "star-outlined"}
-                          size={24}
-                          color="black"
-                          onPress={() => toggleFavorite(item)}
-                        />
+                        {
+                          item?.fixture?.status?.short === "NS" &&
+                          // <Text style={{fontSize:14,fontWeight:'bold'}}>AI</Text>
+
+                          <Image
+                            resizeMethod='contain'
+                            style={{width:25,height:28}}
+                            source={require('../../../assets/images/ai.png')}
+                          />
+                        }
+
 
                       </View>
 
@@ -213,7 +238,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent:'space-between',
-    gap:5
+    justifyContent: 'space-between',
+    gap: 5
   },
 })

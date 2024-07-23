@@ -25,9 +25,8 @@ export default function HomePage() {
   const { getUser } = useAuthCall()
   const { getFixtures } = useSportCall()
 
-  const navigate = useNavigation()
 
-  const [activeButton, setActiveButton] = useState('');
+  const [activeButton, setActiveButton] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuAnimation = useRef(new Animated.Value(-250)).current;
   const [modalVisible, setModalVisible] = useState(false);
@@ -142,7 +141,7 @@ export default function HomePage() {
               {/* CONTENT COMPONENTS */}
               <View style={homePageStyle.content}>
                 {
-                  activeButton === "fixtures" && <Soccer fixturesData={fixturesData} />
+                  activeButton === "fixtures" && <Soccer fixturesData={fixturesData} userData={userData} userInfo={userInfo}/>
                 }
                 {(activeButton === "home") && <Dashboard />}
               </View>

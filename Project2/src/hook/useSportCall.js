@@ -47,8 +47,20 @@ const useSportCall = () => {
   }
 
 
+  //favorileri db ye gönder
+  const postFavoriteData=async(params)=>{
+
+    try {
+      
+    } 
+    catch (error) {
+
+    }
+  }
+
   return {
-    getFixtures
+    getFixtures,
+    postFavoriteData
   }
 
 
